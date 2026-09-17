@@ -1,0 +1,23 @@
+# Grafana dashboard provisioning - file provider.
+#
+# Copy to /etc/grafana/provisioning/dashboards/ and put the dashboard JSON
+# files (dashboards/*.json from this repo) in the directory set by
+# `options.path`. Restart Grafana; the dashboards appear in the
+# "Fractal Techware" folder and are re-read from disk every 30 seconds.
+#
+# Note: this provider sets an explicit `folder`/`folderUid`, so it must NOT
+# also set `foldersFromFilesStructure: true` - Grafana rejects that
+# combination and stops provisioning dashboards entirely.
+apiVersion: 1
+
+providers:
+  - name: fractal-techware-free
+    orgId: 1
+    folder: Fractal Techware
+    folderUid: fractal-techware
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards

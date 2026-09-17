@@ -1,0 +1,5 @@
+# Local publishing notes (grafana.com submission, repo metadata) - not part of the repo
+PUBLISHING.md
+.DS_Store
+__pycache__/
+*.pyc

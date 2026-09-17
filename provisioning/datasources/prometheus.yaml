@@ -1,0 +1,22 @@
+# Grafana data source provisioning - Prometheus.
+#
+# Copy to /etc/grafana/provisioning/datasources/ (or mount it there), point
+# `url` at your Prometheus-compatible server, and restart Grafana.
+#
+# The dashboards do NOT depend on this uid or name: every panel resolves its
+# data source through the DS_PROMETHEUS dashboard variable, which defaults to
+# your default Prometheus data source. Any Prometheus-compatible backend works
+# (Prometheus, Grafana Mimir, Thanos, VictoriaMetrics, Grafana Cloud).
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    uid: prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+    jsonData:
+      httpMethod: POST
+      timeInterval: 15s

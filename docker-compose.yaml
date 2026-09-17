@@ -1,0 +1,53 @@
+# Try the free dashboards locally: node_exporter + Prometheus + Grafana 11,
+# with the data source and both dashboards provisioned from this repo.
+#
+#   docker compose up -d
+#   open http://localhost:3000          (anonymous admin, no login)
+#
+# Ports bind to 127.0.0.1 only. Override them if 3000/9090 are taken:
+#   GRAFANA_PORT=3001 PROMETHEUS_PORT=9091 docker compose up -d
+#
+# Infrastructure Overview fills with data from the node_exporter container
+# (on Docker Desktop that is the Docker VM, not your laptop). The Kubernetes
+# Namespaces & Pods dashboard needs kube-state-metrics + cAdvisor from a real
+# cluster, so it stays empty in this stack.
+#
+# Demo only: anonymous admin access. Do not expose it to untrusted networks.
+
+name: ftw-grafana-free
+
+services:
+  node-exporter:
+    image: prom/node-exporter:v1.8.1
+    command:
+      - --path.rootfs=/host
+    pid: host
+    volumes:
+      - /:/host:ro,rslave
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    ports:
+      - "127.0.0.1:${PROMETHEUS_PORT:-9090}:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - node-exporter
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.1.0
+    ports:
+      - "127.0.0.1:${GRAFANA_PORT:-3000}:3000"
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+    volumes:
+      - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+    restart: unless-stopped
