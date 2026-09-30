@@ -25,7 +25,7 @@ Both dashboards:
   Grafana **10.4.5** and **11.1.0** instances.
 
 They are a free sample of the
-[Fractal Techware Grafana Observability Dashboard Pack](https://fractaltechware.gumroad.com/l/grafana-dashboard-pack?utm_source=github&utm_medium=readme&utm_campaign=free-repo).
+[Fractal Techware Grafana Observability Dashboard Pack](https://store.fractaltechware.com/l/grafana-dashboard-pack?utm_source=github&utm_medium=readme&utm_campaign=free-repo).
 
 ---
 
@@ -170,7 +170,7 @@ dashboards, same data source handling):
 | **Dashboards** | **2** | **2** | **8** | **13** |
 | License | MIT | Personal / internal | Internal | Includes client use |
 
-[See the full pack on Gumroad →](https://fractaltechware.gumroad.com/l/grafana-dashboard-pack?utm_source=github&utm_medium=readme&utm_campaign=free-repo)
+[See the full pack on Gumroad →](https://store.fractaltechware.com/l/grafana-dashboard-pack?utm_source=github&utm_medium=readme&utm_campaign=free-repo)
 
 ## Contributing
 
