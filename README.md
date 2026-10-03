@@ -7,10 +7,10 @@
 
 Two production-ready, MIT-licensed Grafana dashboards for Prometheus:
 
-| Dashboard | For | Needs |
-|---|---|---|
-| [**Infrastructure Overview**](dashboards/infrastructure-overview.json) | Linux hosts, VMs, homelabs | [node_exporter](https://github.com/prometheus/node_exporter) |
-| [**Kubernetes Namespaces & Pods**](dashboards/kubernetes-namespaces-pods.json) | Any Kubernetes cluster | [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) + cAdvisor (kubelet) — both included in [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) |
+| Dashboard | Import ID | For | Needs |
+|---|:-:|---|---|
+| [**Infrastructure Overview**](dashboards/infrastructure-overview.json) | [**25798**](https://grafana.com/grafana/dashboards/25798-infrastructure-overview/) | Linux hosts, VMs, homelabs | [node_exporter](https://github.com/prometheus/node_exporter) |
+| [**Kubernetes Namespaces & Pods**](dashboards/kubernetes-namespaces-pods.json) | [**25799**](https://grafana.com/grafana/dashboards/25799-kubernetes-namespaces-pods/) | Any Kubernetes cluster | [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics) + cAdvisor (kubelet) — both included in [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) |
 
 Both dashboards:
 
@@ -67,7 +67,18 @@ Metrics used: `container_cpu_usage_seconds_total`,
 
 ## Install
 
-### Option 1 — Import in the Grafana UI
+### Option 1 — Import by ID from grafana.com (fastest)
+
+Both dashboards are published on grafana.com, so you do not need this repo to try them:
+
+1. In Grafana go to **Dashboards → New → Import**.
+2. Paste the ID — **25798** (Infrastructure Overview) or **25799** (Kubernetes Namespaces & Pods) — and click **Load**.
+3. Pick your Prometheus data source and click **Import**.
+
+- https://grafana.com/grafana/dashboards/25798-infrastructure-overview/
+- https://grafana.com/grafana/dashboards/25799-kubernetes-namespaces-pods/
+
+### Option 2 — Import the JSON from this repo
 
 1. Download the JSON file from [`dashboards/`](dashboards/) (or clone this repo).
 2. In Grafana go to **Dashboards → New → Import**.
@@ -75,7 +86,7 @@ Metrics used: `container_cpu_usage_seconds_total`,
 4. When prompted for **Prometheus data source**, pick your Prometheus.
 5. Click **Import**.
 
-### Option 2 — Provisioning (dashboards as code)
+### Option 3 — Provisioning (dashboards as code)
 
 ```bash
 git clone https://github.com/Fractal-Techware/grafana-dashboards.git
@@ -99,7 +110,7 @@ sudo systemctl restart grafana-server
 On Kubernetes with kube-prometheus-stack you can instead ship the JSON files as
 ConfigMaps labelled `grafana_dashboard: "1"` for the Grafana sidecar to pick up.
 
-### Option 3 — Try it locally with Docker Compose
+### Option 4 — Try it locally with Docker Compose
 
 Starts node_exporter, Prometheus and Grafana 11 with everything provisioned:
 
