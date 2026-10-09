@@ -167,7 +167,7 @@ These two dashboards are free forever under the MIT license. If they are useful,
 the full pack builds on the same conventions (shared variables, cross-linked
 dashboards, same data source handling):
 
-| | Free (this repo) | Starter — $9 | Pro — $39 | Studio — $79 |
+| | Free (this repo) | Starter — $9 | Pro — $39 | Agency — $299 |
 |---|:-:|:-:|:-:|:-:|
 | Infrastructure Overview | ✓ | ✓ | ✓ | ✓ |
 | Node Exporter Details (per-host deep dive) | | ✓ | ✓ | ✓ |
